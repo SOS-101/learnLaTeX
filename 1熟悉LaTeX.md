@@ -9,7 +9,7 @@ TeX
 ### 1.1.1 LaTeX的发行版及其安装
 CTeX
 
-TeX Live
+`TeX Live`
 
 #### 1.1.1.1 CTeX套装
 [CTeX](http://www.ctex.org/HomePage)
@@ -40,14 +40,14 @@ ps2pdf、pdf2ps等
 
 编译程序
 
-DVI文件格式
+DVI 文件格式
 
 pdfTeX、LuaTeX、XeTeX
 
 ## 从一个例子说起
 ### 1.2.1 确定目标
 ### 1.2.2 从提纲开始
-注释 %
+注释  `%`
 
 文档类 编码方式
 
@@ -65,7 +65,7 @@ LaTeX自动控制缩进
 通常汉字后面空格会被忽略，其他不会
 
 ### 1.2.4 命令与环境
-命令都以\开始，后接参数
+命令都以 `\` 开始，后接参数
 
 声明
 
@@ -73,9 +73,9 @@ en dash
 
 ### 1.2.5 遭遇数学公式
 
-正文公式或行内公式 \$公式内容\$
+正文公式或行内公式 `$公式内容$`
 
-显示公式或列表公式 equation环境
+显示公式或列表公式 `equation` 环境
 
 键盘上没有的，可以用命令
 
@@ -85,19 +85,19 @@ en dash
 1. 插入事先准备好的图像
 2. 使用LaTeX代码画图
 
-插图使用graphicx宏包
+插图使用 `graphicx` 宏包
 
-宏包在导言区使用\usepackage命令导入
+宏包在导言区使用 `\usepackage` 命令导入
 
 单独环境插图
 
 浮动体
 
-标签 \label
+标签 `\label`
 
-表格 tabular环境
+表格 `tabular` 环境
 
-\qquad 产生空格
+`\qquad` 产生空格
 
 ### 1.2.7 自动化工具
 BibTex  参考文献数据库 文件后缀：.bib
@@ -109,17 +109,12 @@ BibTex  参考文献数据库 文件后缀：.bib
 交叉引用
 
 ### 1.2.8 设计文章格式
+设计页面尺寸 `geometry` 宏包
 
-设计页面尺寸 geometry宏包
+图表标题格式 `caption` 宏包
 
-图表标题格式 caption宏包
+目录 `tocbibind` 宏包
 
-目录 tocbibind宏包
+定义新环境 `\newenviroment`
 
-定义新环境 \newenviroment
-
-定义新命令 \newcommand
-
-
-
-
+定义新命令 `\newcommand`

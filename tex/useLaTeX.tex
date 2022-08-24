@@ -1,0 +1,232 @@
+\documentclass[UTF8]{ctexbook}
+
+\usepackage{graphicx}
+\usepackage{bookmark}
+\usepackage{listings}
+\usepackage{circuitikz}
+\lstset{numbers=left}
+
+\title{\LaTeX{} 使用记录}
+\author{ooohpi}
+\date{\today}
+
+\begin{document}
+\maketitle
+\tableofcontents
+\chapter{熟悉 \LaTeX{}}
+为啥要用\LaTeX{}??
+
+\section{让\LaTeX{}跑起来}
+\LaTeX{} 是有不同的发行版的，这里我选择的是 Tex Live 这个发行版。
+
+可以通过一些镜像源来下载该软件，这里我选择的 \href{https://mirrors.tuna.tsinghua.edu.cn/help/CTAN/}{Tsinghua 镜像源}。
+
+该软件的安装是挺简单的，设置一下安装路径，另外可以选择需要安装的宏包，这里我就没有选择，直接默认安装。
+
+安装后，有一个 TLShell TeX Live Manager 软件，可以设置镜像源，并更新或者下载新的宏包。
+
+安装了 TeX Live 后，由于我是用的 VSCode，所以需要安装一个扩展 LaTeX Workshop。这样基本就能够用了。
+
+通过一小段代码来检验上面软件安装后的效果。
+
+\begin{lstlisting}[language=Tex]
+  \documentclass{article}
+
+  \begin{document}
+    Hello \LaTeX !
+  \end{document}
+  
+\end{lstlisting}
+
+由于 \LaTeX{} 是面向西文的，所以对于中文，需要使用一些宏包帮助我们设置或加载所需的字体、编码等。
+
+\begin{lstlisting}[language=TeX, escapechar=']
+  \documentclass[UTF8]{ctexart}
+
+  \begin{document}
+    '你好，'\LaTeX{}!
+  \end{document}
+\end{lstlisting}
+
+\section{从一个例子说起}
+\subsection{确定目标}
+对于目标的话，你可能需要写一篇小论文、一本书、笔记等等。那么不同的目标，就需要我们确定要使用什么语言及哪些文档类、宏包等，也可以大致确定文档内容的构成元素，如正文、图标、代码、引用等等。
+
+\subsection{从提纲开始}
+在确定了目标过后，就可以对 \LaTeX{} 进行大致的设置，来满足我们的目标需求。
+
+\begin{lstlisting}[language=Tex]
+  %-*- coding: UTF8 -*-
+  % gougu.tex
+  
+  \documentclass[UTF8]{ctexart}
+
+  \title{xxx}
+  \author{xx}
+  \date{\today}
+
+  \bibliographystyle{plain}
+
+  \begin{document}
+    \maketitle
+    \tableofcontents
+    \section{xxx}
+    \section{ppp}
+    \bibliography{math}
+
+  \end{document}
+\end{lstlisting}
+
+这里有几处使用了注释，在 \LaTeX{} 中注释通过在行首使用 \% 实现，注释可以帮助我们以后更好的理解文档的内容和设置。相信学习过编程的同学应该有听过注释的重要性。
+
+文档类，通过 documentclass 命令来设置。
+
+标题、作者、日期等信息的声明。
+
+document 环境，通过 begin 和 end 命令来声明。
+
+document 环境前，通常称为导言区（preamble），bibliographystyle 命令设置了参考文献的格式，很多文档的设置是在导言区的。
+
+通过 maketitle 命令实际输出标题。
+
+通过 tableofcontents 命令输出目录。
+
+section 命令开始新的一节。
+
+bibliography 命令来从文献数据库里提取信息。
+
+除了正文外，空格并无太大影响，可以通过其来使文档格式更受看。
+
+比如目录这些内容，需要多次编译才能正常显示出来。
+
+\subsection{填写正文}
+空行分段，空格和单个换行并无太大作用。
+
+文档代码里，段前不同缩进。
+
+中文汉字和其他字符间使用空格分隔，可能更好。
+
+\subsection{命令和环境}
+脚注通过 footnote 命令实现。
+
+emph 命令可以改变字体形状，表示强调。
+
+命令都以 \textbackslash 开头,后接命令，命令可以带有参数，如果参数不止一个，需用花括号包裹起来，如果带有可选参数，则使用方括号包裹起来。注意命令与其他内容之间的分隔。
+% 这里可以直接将命令格式通过表格什么的排版出来，更直观
+
+引用通过声明 quote 环境来实现。
+
+一些环境的预设可能并不能满足我们的要求，这是我们可以自己对其进行修改。
+
+zihao 命令可以选择字号，kaishu 命令可以将字体切换为楷书。这些命令又叫声明，会对其后直到该分组结束的内容产生影响。
+
+一个环境自然就是一个分组，可以通过 \{\} 产生一个分组。
+
+环境声明的一般形式。环境可带参数和可选参数。
+
+摘要通过 abstract 命令实现。
+
+定理环境是一类环境？？使用前需要在导言区进行定义？？
+
+\begin{lstlisting}[language=Tex]
+  \newtheorem{thm}{mytherom} % code in preamble
+
+  \begin{thm}[theromname]
+    xxxx
+  \end{thm}
+  
+\end{lstlisting}
+
+\subsection{遭遇数学公式}
+通过 \$ 将内容包裹起来，就可以在正文中插入数学公式。将这样写在正文中的公式称为正文公司或行内公式。
+
+还有一种显示公式或者叫列表公式的方法在文档中显示公式。通过 equation 环境可以实现。
+
+对于数学公式，一些符号并不能直接键入，这时可以通过命令来显示正确的符号。
+
+数学公式不止是符号的堆砌，还有其结构，如上下标、分式、根式、矩阵等。
+
+一些符号可能没有直接的命令，这时可以通过命令和结构的组合来达到想要的效果。如 $^\circ$。
+
+对于公式的键入，通过将常用命令熟记，应可以较好的完成公式代码，不过也可以考虑一些自动化工具，来通过识别以输出 \LaTeX 数学公式代码的目的。
+
+\subsection{使用图表}
+对于图片，可以使用已经准备好的图，或者在文档源码里通过代码绘制，后者一般较难。
+
+插图功能需要导入宏包来实现，例如 graphicx 。通过 usepackage 命令可以导入宏包，导入宏包后，即可利用宏包提供的命令实现目标。
+
+graphics 提供了 includegraphics 命令来插入图片。通过对该命令的可选参数的设置，可以调整加入图片的效果。
+
+一般没有直接插入图片，而是在单独的环境里插入图片，如 figure 环境，可通过可选参数对其进行设置，也可在环境里使用其他命令，如给图片添加标题、序号、标签等，以免和正文产生不想要的效果，当然直接插入满足目的也可，得灵活安排，是吧。
+
+对于表格，一般直接通过 \LaTeX 代码实现，如 tabular 环境，而且其通常放置于 table 环境中。
+\begin{lstlisting}[language=Tex]
+  % need use package 'float' in preamble
+  \begin{table}[H] 
+    \begin{tabular}{|rrr|}
+      \hline
+      $a$ & $b$ & $c$ \\
+      \hline
+      3 & 4 & 5 \\
+      5 & 12 & 13 \\
+      \hline
+    \end{tabular}%
+    \qquad
+    $a^2 + b^2 = c^2$
+  \end{table}
+\end{lstlisting}
+
+通过 qquad 命令可以产生 2em 的空格。
+
+上述 figure 和 table 环境有叫做浮动环境。上面 table 环境的特殊参数 H 是由 float 宏包实现的，使得 table 环境不浮动。
+
+\subsection{自动化工具}
+自动化工具处理的一大任务就是参考文献列表。
+
+通过 BibTeX 处理参考文献列表，还需要准备其参考文献数据库，后缀为 bib 的文件，该文件一般不是人工输入，而是通过别的文献管理工具生成。
+
+通过 bibliographystyle 命令声明了参考文献列表的格式，bibliography 命令读取参考文献数据库，并打印参考文献列表。但还需要在文章中通过 cite 命令来引用文献，该命令会在引用位置处显示该引用文献在参考文献列表中的编号。如果不要直接引用，可以通过 nocite 命令将文献显示在参考文献列表，一般将这些命令放置与 bibliography 命令之前。
+
+其他的较简单的自动化工具还有页码、定理公式等的自动编号、图标公式等的交叉引用。
+
+目录通过 tableofcontents 命令显示。
+
+通过 label 命令将对象设置标签，就可通过基本的交叉引用命令 ref 对其进行引用。其他一些引用命令可能显示更好的效果，不过需要使用别的宏包，如 amsmath 提供了 eqref 命令，提供更好的公式引用效果。
+
+\subsection{设计文章格式}
+在完成上述过程后，会发现编译后的文档效果并不是我们想要的，如字体、字号、页面大小、页边距等等，不过好在有一些宏包可以帮助我们完成这些格式的设计。一些简单的设置可以放置在导言区，如果比较复杂了，我觉得还是通过模板进行设计可能更好，也便于以后的持续改进和利用。
+
+设计页面尺寸可使用 geometry 宏包。
+
+设计图表标题格式可使用 caption 宏包。
+
+增加目录项目可使用 tocbibind 宏包。
+
+可以通过 newenvironment 命令定义新的环境，在后续代码中使用新的环境，来是的其结构更加简洁。
+\begin{lstlisting}[language=Tex]
+  \newenvironment{myquote}
+    {\begin{quote}\kaishu\zihao{-5}}
+    {\end{quote}}
+\end{lstlisting}
+
+可以通过 newcommand 命令定义新的命令。
+\begin{lstlisting}[language=Tex]
+  \newcommand{\degree}{^\circ}
+\end{lstlisting}
+
+
+\chapter{组织你的文本}
+
+\chapter{自动化工具}
+
+\chapter{玩转数学公式}
+
+\chapter{绘制图表}
+
+\chapter{幻灯片演示}
+
+\chapter{从错误中救赎}
+
+\chapter{\LaTeX{}无极限}
+
+\end{document}

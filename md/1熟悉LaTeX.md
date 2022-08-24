@@ -48,6 +48,7 @@ ps2pdf、pdf2ps等
 > 通过命令行获取帮助文档
 
 ### 1.1.3 “Happy TeXing”与“特可爱排版”
+英文
 ```latex
 \documentclass{article}
 
@@ -58,6 +59,7 @@ Happy \TeX ing!
 \end{document}
 ```
 
+中文
 ```latex
 \documentclass[UTF8]{ctex}
 
@@ -72,15 +74,14 @@ Happy \TeX ing!
 \end{document}
 ```
 
-编译程序
-
 DVI 文件格式
 
+编译程序  
 pdfTeX、LuaTeX、XeTeX
 
 ## 从一个例子说起
 ### 1.2.1 确定目标
->万事开头难？
+> 万事开头难？
 
 ### 1.2.2 从提纲开始
 - 文档的结构
@@ -89,7 +90,7 @@ pdfTeX、LuaTeX、XeTeX
 
 注释  `%`
 
->注释的艺术？
+> 注释的艺术？
 
 文档类 编码方式
 
@@ -253,5 +254,5 @@ BibTex  参考文献数据库 文件后缀：`.bib`
 \newcommand\degree{^\circ}
 ```
 
-> 格式与内容分离
+> 格式与内容分离  
 > 模块化
